@@ -8,6 +8,9 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <assert.h>
+#include <cstring>
+#include <cstdlib>
+#include <cstdio>
 
 /*
 This program does the following.
