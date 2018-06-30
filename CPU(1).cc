@@ -92,7 +92,7 @@ Add the following functionality.
    c) Restart the idle process to use the rest of the time slice.
 */
 
-#define NUM_SECONDS 5
+#define NUM_SECONDS 20
 #define EVER ;;
 
 #define assertsyscall(x, y) if(!((x) y)){int err = errno; \
@@ -401,7 +401,7 @@ void create_idle()
     }
 }
 
-PCB* add_PCB(char* process_element, int index) //Function to create a process's PCB and add to new_list
+PCB* add_PCB(char* process_element) //Function to create a process's PCB and add to new_list
 {
    PCB *new_pcb;
    new_pcb = new(PCB);
