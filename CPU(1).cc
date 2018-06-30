@@ -401,6 +401,18 @@ void create_idle()
     }
 }
 
+PCB* add_PCB(char* process_element, int index) //Function to create a process's PCB and add to new_list
+{
+   PCB *new_pcb;
+   new_pcb = new(PCB);
+   new_pcb->state = NEW;
+   new_pcb->name = "&process_element";
+   new_pcb->interrupts = 0;
+   new_pcb->switches = 0;
+   
+   return *new_pcb;
+}
+
 int main(int argc, char **argv)
 {
     boot();
