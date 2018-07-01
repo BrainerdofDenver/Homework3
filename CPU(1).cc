@@ -410,11 +410,23 @@ PCB* add_PCB(char* process_element) //Function to create a process's PCB and add
    new_pcb->interrupts = 0;
    new_pcb->switches = 0;
    
-   return *new_pcb;
+   return new_pcb;
 }
 
 int main(int argc, char **argv)
-{
+{	
+	if ( argc >= 2)
+	{
+		for (int i = 2; i < argc; i++)
+		{
+			WRITES("Process ");
+			WRITES("&argv[i]");
+			WRITES(" added to new process list \n");
+			
+			new_list.push_front(add_PCB(argv[i]));
+		}
+	}
+	
     boot();
 
     create_idle();
