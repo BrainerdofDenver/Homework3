@@ -301,6 +301,16 @@ void scheduler(int signum)
     assert(signum == SIGALRM);
     sys_time++;
 
+	if (!new_list.empty())
+	{
+		PCB* tmp = start_process();
+		processes.push_front(tmp);
+	}
+	
+	if (processes.back()->state == READY)
+	{
+		
+	}
     PCB* tocont = idle;
 
     WRITES("continuing");
@@ -411,6 +421,25 @@ PCB* add_PCB(char* process_element) //Function to create a process's PCB and add
    new_pcb->switches = 0;
    
    return new_pcb;
+}
+
+PCB* start_process()
+{
+	if (!new_list.empty())
+	{
+		running = new_list.back();
+		new_list.pop_back();
+    if((running->pid = fork()) == 0)//Taken from your above codeh
+		{
+			pause();
+			perror("pause in start_process");
+		}
+		running->state = READY;
+		running->ppid = getpid();
+		running->started = sys_time;
+		WRITES("New process added to queue");
+		return running;
+	}
 }
 
 int main(int argc, char **argv)
